@@ -88,7 +88,7 @@ module RComposite
       @opacity_percent = percent
       # intercept original alpha channel with pixel intensity
       alpha_channel = @image.channel(Magick::AlphaChannel).negate
-      intensity = (Magick::MaxRGB * (percent/100.0)).round
+      intensity = (Magick::QuantumRange * (percent/100.0)).round
       alpha_channel.composite!(Magick::Image.new(width, height) { self.background_color = Magick::Pixel.new(intensity,intensity,intensity) }, Magick::CenterGravity, Multiply)
       alpha_channel.matte = false
       
